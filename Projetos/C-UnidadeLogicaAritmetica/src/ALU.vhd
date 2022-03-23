@@ -47,7 +47,7 @@ architecture  rtl OF alu is
   -- Aqui declaramos sinais (fios auxiliares)
   -- e componentes (outros módulos) que serao
   -- utilizados nesse modulo.
-
+	signal testeSaida : STD_LOGIC_VECTOR(15 downto 0);
 	component zerador16 IS
 		port(z   : in STD_LOGIC;
 			   a   : in STD_LOGIC_VECTOR(15 downto 0);
@@ -98,11 +98,11 @@ architecture  rtl OF alu is
 		);
 	end component;
 	
-	component Xor is
+	component Xor16 is
 		port(
 			a:   in  STD_LOGIC_VECTOR(15 downto 0);
 			b:   in  STD_LOGIC_VECTOR(15 downto 0);
-			q:   out STD_LOGIC_VECTOR(15 downto 0)
+			res:   out STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 
@@ -111,8 +111,8 @@ architecture  rtl OF alu is
 			a:    in  STD_LOGIC_VECTOR(15 downto 0);  
 			dir:  in  std_logic;                      
 			size: in  std_logic_vector(2 downto 0);   
-			q:    out STD_LOGIC_VECTOR(15 downto 0));  
-		); 
+			q:    out STD_LOGIC_VECTOR(15 downto 0)
+		);  
 	end component;
 
    SIGNAL
@@ -123,6 +123,8 @@ architecture  rtl OF alu is
 			andout,
 			adderout,
 			muxout,
+			shiftout,
+			xorout,
 			precomp: std_logic_vector(15 downto 0);
 
 begin
@@ -178,26 +180,29 @@ begin
 	inversormux: inversor16 port map(
 		z => no,
 		a => muxout,
-		y => saida
+		y => precomp
 	);
 
 	comparador: comparador16 port map(
-		a => saida,
+		a => precomp,
 		zr => zr,
 		ng => ng
 	);
 
-	xor: Xor port map(
-		a => nxout
-		b => nyout
-		q => xorout
+	saida <= precomp;
+
+
+	xor16comp: Xor16 port map(
+		a => nxout,
+		b => nyout,
+		res => xorout
 
 	);
 
 	shift: BarrelShifter16 port map(
-		a => nxout
-		dir => dir
-		size => nyout(2 downto 0)
+		a => nxout,
+		dir => dir,
+		size => nyout(2 downto 0),
 		q => shiftout
 	);
 
