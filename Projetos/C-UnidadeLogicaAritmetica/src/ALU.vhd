@@ -100,7 +100,7 @@ architecture  rtl OF alu is
 		port(
 			a:   in  STD_LOGIC_VECTOR(15 downto 0);
 			b:   in  STD_LOGIC_VECTOR(15 downto 0);
-			q:   out STD_LOGIC_VECTOR(15 downto 0)
+			res:   out STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 
@@ -191,7 +191,7 @@ begin
 	xor16comp: Xor16 port map(
 		a => nxout,
 		b => nyout,
-		q => xorout
+		res => xorout
 
 	);
 

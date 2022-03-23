@@ -5,8 +5,8 @@ use ieee.std_logic_1164.all;
 
 entity Xor16 is
 	port(
-		a,b:         in STD_LOGIC;   -- entradas
-		res: out STD_LOGIC   -- resultado
+		a,b:         in STD_LOGIC_VECTOR(15 downto 0);   -- entradas
+		res: out STD_LOGIC_VECTOR(15 downto 0)   -- resultado
 	);
 end entity;
 
