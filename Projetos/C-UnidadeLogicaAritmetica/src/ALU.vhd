@@ -37,7 +37,8 @@ entity ALU is
 			no:    in STD_LOGIC;                     -- inverte o valor da saída
 			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
 			ng:    out STD_LOGIC;                    -- setado se saída é negativa
-			saida: out STD_LOGIC_VECTOR(15 downto 0) -- saída de dados da ALU
+			saida: out STD_LOGIC_VECTOR(15 downto 0); -- saída de dados da ALU
+			carry: out STD_LOGIC                      -- saida com o carry do adder
 	);
 end entity;
 
@@ -64,7 +65,8 @@ architecture  rtl OF alu is
 		port(
 			a   :  in STD_LOGIC_VECTOR(15 downto 0);
 			b   :  in STD_LOGIC_VECTOR(15 downto 0);
-			q   : out STD_LOGIC_VECTOR(15 downto 0)
+			q   : out STD_LOGIC_VECTOR(15 downto 0);
+			carry : out STD_LOGIC_VECTOR(14 downto 0)
 		);
 	end component;
 
@@ -135,6 +137,8 @@ begin
 		b => nyout,
 		q => adderout
 	);
+
+	carry <= when (nxout(15) xnor nyout(15)) and (nxout(15) xor adderout(15));
 
 	andxy: And16 port map(
 		a => nxout,
