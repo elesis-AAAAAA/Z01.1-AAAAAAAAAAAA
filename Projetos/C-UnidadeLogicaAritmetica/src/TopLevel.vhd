@@ -40,7 +40,8 @@ architecture rtl of TopLevel is
 
   signal x : std_logic_vector(15 downto 0) := x"0073"; -- 115
   signal y : std_logic_vector(15 downto 0) := x"005F"; -- 95
-  signal bcd1 : std_logic_vector(3 downto 0);
+  signal bcd1, bcd2, bcd3, bcd4 : std_logic_vector(3 downto 0);
+
 --------------
 -- component
 --------------
@@ -100,12 +101,26 @@ begin
     no => SW(5),
     zr => LEDR(0),
     ng => LEDR(1),
-    saida(3 downto 0) => bcd1
-    
+    saida(3 downto 0) => bcd1,
+    saida(7 downto 4) => bcd2,
+    saida(11 downto 8) => bcd3,
+    saida(15 downto 12) => bcd4
   );
 
   hex0port: sevenSeg port map (
 			bcd => bcd1,
 			leds => HEX0);
 		
+  hex1port: sevenSeg port map (
+    bcd => bcd2,
+    leds => HEX1);
+
+  hex2port: sevenSeg port map (
+    bcd => bcd3,
+    leds => HEX2);
+
+  hex3port: sevenSeg port map (
+  bcd => bcd4,
+  leds => HEX3);
+
 end rtl;

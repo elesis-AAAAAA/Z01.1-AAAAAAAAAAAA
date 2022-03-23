@@ -45,7 +45,7 @@ architecture  rtl OF alu is
   -- Aqui declaramos sinais (fios auxiliares)
   -- e componentes (outros módulos) que serao
   -- utilizados nesse modulo.
-
+	signal testeSaida : STD_LOGIC_VECTOR(15 downto 0);
 	component zerador16 IS
 		port(z   : in STD_LOGIC;
 			   a   : in STD_LOGIC_VECTOR(15 downto 0);
@@ -152,13 +152,16 @@ begin
 	inversormux: inversor16 port map(
 		z => no,
 		a => muxout,
-		y => saida
+		y => precomp
 	);
 
 	comparador: comparador16 port map(
-		a => saida,
+		a => precomp,
 		zr => zr,
 		ng => ng
 	);
+
+
+	saida <= precomp;
 
 end architecture;
