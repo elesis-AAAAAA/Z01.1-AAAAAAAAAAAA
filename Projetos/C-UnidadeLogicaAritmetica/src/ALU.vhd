@@ -33,8 +33,9 @@ entity ALU is
 			nx:    in STD_LOGIC;                     -- inverte a entrada x
 			zy:    in STD_LOGIC;                     -- zera a entrada y
 			ny:    in STD_LOGIC;                     -- inverte a entrada y
-			f:     in STD_LOGIC;                     -- se 0 calcula x & y, senão x + y
+			f:     in STD_LOGIC_VECTOR(1 downto 0);                     -- se 0 calcula x & y, senão x + y
 			no:    in STD_LOGIC;                     -- inverte o valor da saída
+			dir:   in STD_LOGIC;                     -- bit de controle direção do shifter
 			zr:    out STD_LOGIC;                    -- setado se saída igual a zero
 			ng:    out STD_LOGIC;                    -- setado se saída é negativa
 			saida: out STD_LOGIC_VECTOR(15 downto 0) -- saída de dados da ALU
@@ -84,13 +85,32 @@ architecture  rtl OF alu is
     );
 	end component;
 
-	component Mux16 is
+	component Mux4Way16 is
 		port (
 			a:   in  STD_LOGIC_VECTOR(15 downto 0);
 			b:   in  STD_LOGIC_VECTOR(15 downto 0);
-			sel: in  STD_LOGIC;
+			c:   in  STD_LOGIC_VECTOR(15 downto 0);
+			d:   in  STD_LOGIC_VECTOR(15 downto 0);
+			sel: in  STD_LOGIC_VECTOR(1 downto 0);
 			q:   out STD_LOGIC_VECTOR(15 downto 0)
 		);
+	end component;
+	
+	component Xor is
+		port(
+			a:   in  STD_LOGIC_VECTOR(15 downto 0);
+			b:   in  STD_LOGIC_VECTOR(15 downto 0);
+			q:   out STD_LOGIC_VECTOR(15 downto 0)
+		);
+	end component;
+
+	component BarrelShifter16 is
+		port(
+			a:    in  STD_LOGIC_VECTOR(15 downto 0);  
+			dir:  in  std_logic;                      
+			size: in  std_logic_vector(2 downto 0);   
+			q:    out STD_LOGIC_VECTOR(15 downto 0));  
+		); 
 	end component;
 
    SIGNAL
@@ -142,9 +162,11 @@ begin
 		q => andout
 	);
 
-	mux: Mux16 port map(
+	mux: Mux4Way16 port map(
 		a => andout,
 		b => adderout,
+		c => xorout,
+		d => shiftout,
 		sel => f,
 		q => muxout
 	);
@@ -159,6 +181,20 @@ begin
 		a => saida,
 		zr => zr,
 		ng => ng
+	);
+
+	xor: Xor port map(
+		a => nxout
+		b => nyout
+		q => xorout
+
+	);
+
+	shift: BarrelShifter16 port map(
+		a => nxout
+		dir => dir
+		size => nyout(2 downto 0)
+		q => shiftout
 	);
 
 end architecture;
