@@ -7,140 +7,64 @@ use ieee.std_logic_1164.all;
 
 entity TopLevel is
 	port(
-		clock:   in  STD_LOGIC;
-		input:   in  STD_LOGIC_VECTOR(15 downto 0);
-		load:    in  STD_LOGIC;
-		address: in  STD_LOGIC_VECTOR(2 downto 0);
-		output:  out STD_LOGIC_VECTOR(15 downto 0)
+		SW      : in  std_logic_vector(9 downto 0);
+		LEDR     : out std_logic_vector(9 downto 0);
+		HEX0		: out std_logic_vector(6 downto 0);
+		HEX1 : out std_logic_vector(6 downto 0);
+		HEX2 : out std_logic_vector(6 downto 0);
+		HEX3 : out std_logic_vector(6 downto 0);
+		HEX4 : out std_logic_vector(6 downto 0);
+		HEX5 : out std_logic_vector(6 downto 0);
+		KEY : in std_logic_vector(3 downto 0)
 	);
 end entity;
 
 architecture arch of TopLevel is
 
-	component Register16 is
+	signal bcd1, bcd2, bcd3, bcd4 : std_logic_vector(3 downto 0);
+
+	component Ram8 is
 		port(
 			clock:   in  STD_LOGIC;
 			input:   in  STD_LOGIC_VECTOR(15 downto 0);
 			load:    in  STD_LOGIC;
+			address: in  STD_LOGIC_VECTOR(2 downto 0);
 			output:  out STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 
-	component Mux8Way16 is
+	component sevenSeg is
 		port (
-				a:   in  STD_LOGIC_VECTOR(15 downto 0);
-				b:   in  STD_LOGIC_VECTOR(15 downto 0);
-				c:   in  STD_LOGIC_VECTOR(15 downto 0);
-				d:   in  STD_LOGIC_VECTOR(15 downto 0);
-				e:   in  STD_LOGIC_VECTOR(15 downto 0);
-				f:   in  STD_LOGIC_VECTOR(15 downto 0);
-				g:   in  STD_LOGIC_VECTOR(15 downto 0);
-				h:   in  STD_LOGIC_VECTOR(15 downto 0);
-				sel: in  STD_LOGIC_VECTOR(2 downto 0);
-				q:   out STD_LOGIC_VECTOR(15 downto 0));
+				bcd : in  STD_LOGIC_VECTOR(3 downto 0);
+				leds: out STD_LOGIC_VECTOR(6 downto 0));
 	end component;
 
-	component DMux8Way is
-		port (
-			a:   in  STD_LOGIC;
-			sel: in  STD_LOGIC_VECTOR(2 downto 0);
-			q0:  out STD_LOGIC;
-			q1:  out STD_LOGIC;
-			q2:  out STD_LOGIC;
-			q3:  out STD_LOGIC;
-			q4:  out STD_LOGIC;
-			q5:  out STD_LOGIC;
-			q6:  out STD_LOGIC;
-			q7:  out STD_LOGIC
+	begin
+		ram: Ram8 port map (
+			clock => not(KEY(0)),
+			input => "0000000000000010",
+			load => SW(0),
+			address => SW(3 downto 1),
+			output(3 downto 0) => bcd1,
+			output(7 downto 4) => bcd2,
+			output(11 downto 8) => bcd3,
+			output(15 downto 12) => bcd4
 		);
-	end component;
 
-	signal load0, load1, load2, load3, load4, load5, load6, load7 : STD_LOGIC;
-	signal output0, output1, output2, output3, output4, output5, output6, output7 : STD_LOGIC_VECTOR(15 downto 0);
+		hex0port: sevenSeg port map (
+			bcd => bcd1,
+			leds => HEX0);
+				
+		hex1port: sevenSeg port map (
+			bcd => bcd2,
+			leds => HEX1);
 
-begin
+		hex2port: sevenSeg port map (
+			bcd => bcd3,
+			leds => HEX2);
 
-	dMuxPm: DMux8Way port map(
-		load,
-		address,
-		load0,
-		load1,
-		load2,
-		load3,
-		load4,
-		load5,
-		load6,
-		load7
-	);
-
-	reg0Pm: Register16 port map(
-		clock,
-		input,
-		load0,
-		output0
-	);
-
-	reg1Pm: Register16 port map(
-		clock,
-		input,
-		load1,
-		output1
-	);
-
-	reg2Pm: Register16 port map(
-		clock,
-		input,
-		load2,
-		output2
-	);
-
-	reg3Pm: Register16 port map(
-		clock,
-		input,
-		load3,
-		output3
-	);
-
-	reg4Pm: Register16 port map(
-		clock,
-		input,
-		load4,
-		output4
-	);
-
-	reg5Pm: Register16 port map(
-		clock,
-		input,
-		load5,
-		output5
-	);
-
-	reg6Pm: Register16 port map(
-		clock,
-		input,
-		load6,
-		output6
-	);
-
-	reg7Pm: Register16 port map(
-		clock,
-		input,
-		load7,
-		output7
-	);
-
-	mux8Pm: Mux8Way16 port map(
-		output0,
-		output1,
-		output2,
-		output3,
-		output4,
-		output5,
-		output6,
-		output7,
-		address,
-		output
-	);
-
+		hex3port: sevenSeg port map (
+			bcd => bcd4,
+			leds => HEX3);
 
 end architecture;
