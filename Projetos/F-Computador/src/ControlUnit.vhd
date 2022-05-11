@@ -32,8 +32,7 @@ architecture arch of ControlUnit is
 begin
 
   loadA <= (not(instruction(17)) and not(instruction(16))) or (instruction(17) and instruction(3));
-  loadD <= (instruction(17) and instruction(4)) or (not(instruction(17)) and instruction(16));
-  loadS <= instruction(17) and instruction(6);
+  loadD <= instruction(17) and instruction(4);
   loadM <= instruction(17) and instruction(5);
   muxALUI_A <= not(instruction(17));
   muxAM <= instruction(13);
