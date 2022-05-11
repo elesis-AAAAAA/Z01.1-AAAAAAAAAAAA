@@ -72,7 +72,7 @@ architecture arch of CPU is
       muxALUI_A                   : out STD_LOGIC;
       muxAM                       : out STD_LOGIC;
       zx, nx, zy, ny, f, no       : out STD_LOGIC;
-      loadA, loadD, loadM, loadPC : out STD_LOGIC
+      loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC
       );
   end component;
 
@@ -116,7 +116,7 @@ begin
     no => c_no,
     loadA => c_loadA,
     loadD => c_loadD,
-    loadC => c_loadS,
+    loadS => c_loadS,
     loadM => writeM,
     loadPC => c_loadPC
   );
