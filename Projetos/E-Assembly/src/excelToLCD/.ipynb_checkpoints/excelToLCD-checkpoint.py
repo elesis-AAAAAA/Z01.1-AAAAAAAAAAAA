@@ -20,7 +20,7 @@ pixels = []
 print(cols, rows)
 
 def encontra_endereco(x, y):
-    return (16384 + y*20 + int(x/16), x%16)
+    return (16384 + y*20, x%16)
 
 for x in range(cols):
     for y in range(rows):
@@ -32,7 +32,7 @@ vals = {}
             
 def set_one(string, pos):
     new = list(string)
-    new[-pos] = '1'
+    new[pos] = '1'
     return ''.join(new)
     
 for p in pixels:
@@ -56,4 +56,7 @@ for k in vals.keys():
     
 f = open("output.nasm", "w")
 f.write(string_final)
-f.close()
+f.close()    
+
+plt.imshow(img)
+plt.show()

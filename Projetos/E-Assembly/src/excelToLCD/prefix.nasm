@@ -1,0 +1,1 @@
+; o conteúdo desse arquivo será prefixado ao arquivo output.nasm quando gerarmos o código
