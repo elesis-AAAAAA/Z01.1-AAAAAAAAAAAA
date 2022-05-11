@@ -71,15 +71,17 @@ architecture arch of CPU is
       zr,ng                       : in STD_LOGIC;
       muxALUI_A                   : out STD_LOGIC;
       muxAM                       : out STD_LOGIC;
+      muxAD                       : out STD_LOGIC;
+      muxDS                       : out STD_LOGIC;
       zx, nx, zy, ny, f, no       : out STD_LOGIC;
-      loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC;
-      muxDS: out STD_LOGIC
+      loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC
       );
   end component;
 
   signal c_muxALUI_A: STD_LOGIC;
   signal c_muxAM: STD_LOGIC;
   signal c_muxDS: STD_LOGIC;
+  signal c_muxAD: STD_LOGIC;
   signal c_zx: STD_LOGIC;
   signal c_nx: STD_LOGIC;
   signal c_zy: STD_LOGIC;
@@ -95,6 +97,7 @@ architecture arch of CPU is
 
   signal s_muxALUI_Aout: STD_LOGIC_VECTOR(15 downto 0);
   signal s_muxAM_out: STD_LOGIC_VECTOR(15 downto 0);
+  signal s_muxAD_out: STD_LOGIC_VECTOR(15 downto 0);
   signal s_muxDS_out: STD_LOGIC_VECTOR(15 downto 0);
   signal s_regAout: STD_LOGIC_VECTOR(15 downto 0);
   signal s_regDout: STD_LOGIC_VECTOR(15 downto 0);
@@ -112,6 +115,7 @@ begin
     muxALUI_A => c_muxALUI_A,
     muxAM => c_muxAM,
     muxDS => c_muxDS,
+    muxAD => c_muxAD,
     zx => c_zx, 
     nx => c_nx, 
     zy => c_zy,
@@ -141,7 +145,7 @@ begin
 
   D: Register16 port map(
     clock => clock,
-    input => s_ALUout,
+    input => s_muxAD_out,
     load => c_loadD,
     output => s_regDout
   );
@@ -165,6 +169,13 @@ begin
     b => inM,
     sel => c_muxAM,
     q => s_muxAM_out
+  );
+
+  muxAD: Mux16 port map (
+    a => s_ALUout,
+    b => instruction(15 downto 0),
+    sel => c_muxAD,
+    q => s_muxAD_out
   );
 
   programCounter: pc port map (
