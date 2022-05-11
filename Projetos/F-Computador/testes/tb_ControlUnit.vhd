@@ -52,11 +52,20 @@ begin
     -- LAB
     -----------------------------------------------
 
+    -- Rúbrica A
+
+    -- Teste LOAD direto no D (com MUX)
     instruction <= "01" & "0111111111111111";
     wait until clk = '1';
 		assert(loadA = '0' and loadD = '1' and loadM = '0' and loadPC = '0' and muxALUI_A = '1' and muxAD = '1')
       report "Falha em Salvar no %D" severity error;
-
+    
+    -- Teste LOAD no A e não D (com MUX)
+    instruction <= "00" & "0111111111111111";
+    wait until clk = '1';
+    assert(loadA = '1' and loadD = '0' and loadM = '0' and loadPC = '0' and muxALUI_A = '1' and muxAD = '0')
+      report "Falha em Salvar no %D" severity error;
+    
 
     -- Teste: loadD
     instruction <= "00" & "0111111111111111";
