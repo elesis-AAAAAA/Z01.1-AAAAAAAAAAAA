@@ -22,7 +22,7 @@ architecture tb of tb_ControlUnit is
         muxALUI_A                   : out STD_LOGIC;                     -- mux que seleciona entre instrução e ALU para reg. A
         muxAM                       : out STD_LOGIC;                     -- mux que seleciona entre reg. A e Mem. RAM para ALU
         zx, nx, zy, ny, f, no       : out STD_LOGIC;                     -- sinais de controle da ALU
-        loadA, loadD, loadM, loadPC : out STD_LOGIC                      -- sinais de load do reg. A, reg. D, Mem. RAM e Program Counter
+        loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC                      -- sinais de load do reg. A, reg. D, Mem. RAM e Program Counter
         );
   end component;
 
@@ -32,11 +32,11 @@ architecture tb of tb_ControlUnit is
   signal muxAM                   : STD_LOGIC := '0';
   signal muxALUI_A                   : STD_LOGIC := '0';
   signal zx, nx, zy, ny, f, no       : STD_LOGIC := '0';
-  signal loadA, loadD,  loadM, loadPC : STD_LOGIC := '0';
+  signal loadA, loadD, loadS, loadM, loadPC : STD_LOGIC := '0';
 
 begin
 
-	uCU: ControlUnit port map(instruction, zr, ng, muxALUI_A, muxAM, zx, nx, zy, ny, f, no, loadA, loadD, loadM, loadPC);
+	uCU: ControlUnit port map(instruction, zr, ng, muxALUI_A, muxAM, zx, nx, zy, ny, f, no, loadA, loadD, loadS, loadM, loadPC);
 
 	clk <= not clk after 100 ps;
 
@@ -58,6 +58,17 @@ begin
     wait until clk = '1';
     assert(loadD = '1')
       report "TESTE 2: LOAD D" severity error;
+
+    -- Teste: loadS
+    instruction <= "00" & "0111111111111111";
+    wait until clk = '1';
+    assert(loadS = '0')
+      report "LOAD S FALSO" severity error;
+
+    instruction <= "10" & "0000000001000000";
+    wait until clk = '1';
+    assert(loadS = '1')
+      report "LOAD S" severity error;
 
     -- Teste: loadM
     instruction <= "00" & "0111111111111111";
