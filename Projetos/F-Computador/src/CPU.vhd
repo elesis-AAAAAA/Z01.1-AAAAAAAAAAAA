@@ -72,7 +72,8 @@ architecture arch of CPU is
       muxALUI_A                   : out STD_LOGIC;
       muxAM                       : out STD_LOGIC;
       zx, nx, zy, ny, f, no       : out STD_LOGIC;
-      loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC
+      loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC;
+      muxDS: out STD_LOGIC
       );
   end component;
 
@@ -94,6 +95,7 @@ architecture arch of CPU is
 
   signal s_muxALUI_Aout: STD_LOGIC_VECTOR(15 downto 0);
   signal s_muxAM_out: STD_LOGIC_VECTOR(15 downto 0);
+  signal s_muxDS_out: STD_LOGIC_VECTOR(15 downto 0);
   signal s_regAout: STD_LOGIC_VECTOR(15 downto 0);
   signal s_regDout: STD_LOGIC_VECTOR(15 downto 0);
   signal s_regSout: STD_LOGIC_VECTOR(15 downto 0);

@@ -21,8 +21,8 @@ entity ControlUnit is
                                                                      -- reg. A e Mem. RAM para ALU
                                                                      -- A  e Mem. RAM para ALU
 		zx, nx, zy, ny, f, no       : out STD_LOGIC;                     -- sinais de controle da ALU
-		loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC               -- sinais de load do reg. A,
-                                                                     -- reg. D, Mem. RAM e Program Counter
+		loadA, loadD, loadS, loadM, loadPC : out STD_LOGIC;               -- sinais de load do reg. A,
+    muxDS: out STD_LOGIC                                                                -- reg. D, Mem. RAM e Program Counter
     );
 end entity;
 
