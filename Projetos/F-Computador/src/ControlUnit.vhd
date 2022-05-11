@@ -35,7 +35,8 @@ begin
   loadS <= instruction(17) and instruction(6);
   loadM <= instruction(17) and instruction(5);
   muxALUI_A <= not(instruction(17));
-  muxAM <=  instruction(13);
+  muxAM <= instruction(13);
+  muxDS <= instruction(14);
   zx <= instruction(17) and instruction(12);  
   nx <= instruction(17) and instruction(11);
   zy <= instruction(17) and instruction(10);
