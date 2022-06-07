@@ -232,6 +232,32 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
 
+        commands.add(String.format("leaw %s, %A", label));
+
+        if (){
+            commands.add("je %D");
+            commands.add("nop");
+        } else if (){
+            commands.add("jne %D");
+            commands.add("nop");
+        } else if (){
+            commands.add("jg %D");
+            commands.add("nop");
+        } else if (){
+            commands.add("jge %D");
+            commands.add("nop");
+        } else if (){
+            commands.add("jl %D");
+            commands.add("nop");
+        } else {
+            commands.add("jle %D");
+            commands.add("nop");
+        }
+        
+        String[] stringArray = new String[ commands.size() ];
+        commands.toArray( stringArray );
+        write(stringArray);
+
      }
 
     /**
