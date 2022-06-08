@@ -231,8 +231,38 @@ public class Code {
                 commands.add("movw %D, (%A)");
 
             } else if (segment.equals("static")) {
+                //atualiza SP
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %D");
+                commands.add("decw %D");
+                commands.add("movw %D, (%A)");
+
+                //Carrega em %D valor que quer salvar
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw (%A), %D");
+
+                Integer address = index + 16;
+                //carrega valor do temp
+                commands.add("leaw $" + address + " %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("temp")) {
+                //atualiza SP
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %D");
+                commands.add("decw %D");
+                commands.add("movw %D, (%A)");
+
+                //Carrega em %D valor que quer salvar
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw (%A), %D");
+
+                Integer address = index + 5;
+                //carrega valor do temp
+                commands.add("leaw $" + address + " %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("pointer")) {
                 if(index==0) {
