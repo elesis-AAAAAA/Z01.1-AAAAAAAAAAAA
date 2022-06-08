@@ -130,8 +130,39 @@ public class Code {
             commands.add(String.format("; %d - PUSH %s %d", lineCode++ ,segment, index));
 
             if (segment.equals("constant")) {
+                //carrega valor da constante
+                commands.add("leaw $" + index + " %A");
+                commands.add("movw %A, %D");
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
 
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
             } else if (segment.equals("local")) {
+                //carrega valor do local
+                commands.add("leaw $" + index + " %A");
+                commands.add("movw %A, %D");
+
+                //acessa endereço local
+                commands.add("leaw $1, %A");
+                commands.add("movw (%A), %A");
+                commands.add("addw %A %D, %A");
+
+                commands.add("movw (%A), %D");
+
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("argument")) {
 
