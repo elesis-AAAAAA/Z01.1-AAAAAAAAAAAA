@@ -31,20 +31,20 @@ SimplePopTemp.vm 1 300
 SimplePopThat.vm 1 300
 SimplePopThis.vm 1 300
 #
-#SimpleAdd.vm 1 300
-#SimpleAnd.vm 1 300
-#SimpleNeg.vm 1 300
-#SimpleOr.vm 1 300
-#SimpleSub.vm 1 300
+SimpleAdd.vm 1 300
+SimpleAnd.vm 1 300
+SimpleNeg.vm 1 300
+SimpleOr.vm 1 300
+SimpleSub.vm 1 300
 #
 #SimplePushAdd.vm 1 300
 SimplePushArg.vm 1 300
 #
-#SimpleEq.vm 3 300
+SimpleEq.vm 3 300
 #SimpleGoto.vm 1 300
-#SimpleGt.vm 3 300
+SimpleGt.vm 3 300
 #SimpleIfGoto.vm 1 300
-#SimpleLt.vm 1 300
+SimpleLt.vm 1 300
 #
 #StackTest.vm 1 3000
 #StaticsTest.vm 1 3000
