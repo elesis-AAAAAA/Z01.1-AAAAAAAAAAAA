@@ -52,14 +52,28 @@ public class Code {
             commands.add("decw %A");
             commands.add("addw (%A), %D, %D");
             commands.add("movw %D, (%A)");
-            //commands.add("addw $1, %A, %D");
-            //commands.add("leaw $0, %A");
-            //commands.add("movw %D, (%A)");
+
+            //incrementa SP
+            commands.add("addw $1, %A, %D");
+            commands.add("leaw $0, %A");
+            commands.add("movw %D, (%A)");
 
         } else if (command.equals("sub")) {
             commands.add(String.format("; %d - SUB", lineCode++));
             // IMPLEMENTAR AQUI O LAB
             // LEMBRAR DE USAR A FUNÇÃO commands.add()!
+            commands.add("leaw $0, %A");
+            commands.add("movw (%A), %A");
+            commands.add("decw %A");
+            commands.add("movw (%A), %D");
+            commands.add("decw %A");
+            commands.add("subw (%A), %D, %D");
+            commands.add("movw %D, (%A)");
+
+            //incrementa SP
+            commands.add("addw $1, %A, %D");
+            commands.add("leaw $0, %A");
+            commands.add("movw %D, (%A)");
         } else if (command.equals("neg")) {
             commands.add(String.format("; %d - NEG", lineCode++));
 
