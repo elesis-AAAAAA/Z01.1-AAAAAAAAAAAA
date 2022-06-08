@@ -165,6 +165,26 @@ public class Code {
                 commands.add("movw %D, (%A)");
 
             } else if (segment.equals("argument")) {
+                //carrega valor do argumento
+                commands.add("leaw $" + index + " %A");
+                commands.add("movw %A, %D");
+
+                //acessa endereço argumento
+                commands.add("leaw $2, %A");
+                commands.add("movw (%A), %A");
+                commands.add("addw %A %D, %A");
+
+                commands.add("movw (%A), %D");
+
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("this")) {
 
