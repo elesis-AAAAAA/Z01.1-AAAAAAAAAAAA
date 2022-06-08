@@ -177,16 +177,16 @@ public class Code {
                 commands.add("decw %D");
                 commands.add("movw %D, (%A)");
 
-                //carrega valor do arg
+                //carrega valor do this
                 commands.add("leaw $" + index + " %A");
                 commands.add("movw %A, %D");
 
-                //acessa endereço arg
+                //acessa endereço this
                 commands.add("leaw $3, %A");
                 commands.add("movw (%A), %A");
                 commands.add("addw %A %D, %D");
 
-                //salvando endereço arg em temp0
+                //salvando endereço this em temp0
                 commands.add("leaw $5, %A");
                 commands.add("movw %D, (%A)");
 
@@ -195,7 +195,7 @@ public class Code {
                 commands.add("movw (%A), %A");
                 commands.add("movw (%A), %D");
                 
-                //Armazena valor no arg desejado
+                //Armazena valor no this desejado
                 commands.add("leaw $5, %A");
                 commands.add("movw (%A), %A");
                 commands.add("movw %D, (%A)");
@@ -207,16 +207,16 @@ public class Code {
                 commands.add("decw %D");
                 commands.add("movw %D, (%A)");
 
-                //carrega valor do arg
+                //carrega valor do that
                 commands.add("leaw $" + index + " %A");
                 commands.add("movw %A, %D");
 
-                //acessa endereço arg
+                //acessa endereço that
                 commands.add("leaw $4, %A");
                 commands.add("movw (%A), %A");
                 commands.add("addw %A %D, %D");
 
-                //salvando endereço arg em temp0
+                //salvando endereço that em temp0
                 commands.add("leaw $5, %A");
                 commands.add("movw %D, (%A)");
 
@@ -225,7 +225,7 @@ public class Code {
                 commands.add("movw (%A), %A");
                 commands.add("movw (%A), %D");
                 
-                //Armazena valor no arg desejado
+                //Armazena valor no that desejado
                 commands.add("leaw $5, %A");
                 commands.add("movw (%A), %A");
                 commands.add("movw %D, (%A)");
@@ -243,7 +243,7 @@ public class Code {
                 commands.add("movw (%A), %D");
 
                 Integer address = index + 16;
-                //carrega valor do temp
+                //carrega valor do static
                 commands.add("leaw $" + address + " %A");
                 commands.add("movw %D, (%A)");
 
