@@ -40,7 +40,7 @@ SimpleSub.vm 1 300
 #SimplePushAdd.vm 1 300
 #SimplePushArg.vm 1 300
 #
-#SimpleEq.vm 3 300
+SimpleEq.vm 3 300
 #SimpleGoto.vm 1 300
 #SimpleGt.vm 3 300
 #SimpleIfGoto.vm 1 300
