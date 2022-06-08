@@ -108,6 +108,37 @@ public class Code {
             if (segment.equals("constant")) {
                 Error.error("Não faz sentido POP com constant");
             } else if (segment.equals("local")) {
+                //atualiza SP
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %D");
+                commands.add("decw %D");
+                commands.add("movw %D, (%A)");
+
+                //carrega valor do local
+                commands.add("leaw $" + index + " %A");
+                commands.add("movw %A, %D");
+
+                //acessa endereço local
+                commands.add("leaw $1, %A");
+                commands.add("movw (%A), %A");
+                commands.add("addw %A %D, %D");
+
+                //salvando endereço local em temp0
+                commands.add("leaw $5, %A");
+                commands.add("movw %D, (%A)");
+
+                //Carrega em %D valor que quer salvar
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw (%A), %D");
+                
+                //Armazena valor no local desejado
+                commands.add("leaw $5, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+
+            
 
             } else if (segment.equals("argument")) {
 
