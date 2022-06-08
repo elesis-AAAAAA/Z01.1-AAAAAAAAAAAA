@@ -391,8 +391,37 @@ public class Code {
                 commands.add("movw %D, (%A)");
 
             } else if (segment.equals("static")) {
+                Integer address = index + 16;
+
+                //carrega valor do static
+                commands.add("leaw $" + address + " %A");
+                commands.add("movw (%A), %D");
+
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("temp")) {
+                Integer address = index + 5;
+                //carrega valor do temp
+                commands.add("leaw $" + address + " %A");
+                commands.add("movw (%A), %D");
+
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("pointer")) {
                 if(index==0) {
