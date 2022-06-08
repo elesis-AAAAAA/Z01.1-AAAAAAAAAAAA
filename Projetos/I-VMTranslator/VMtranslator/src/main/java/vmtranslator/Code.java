@@ -425,10 +425,25 @@ public class Code {
 
             } else if (segment.equals("pointer")) {
                 if(index==0) {
+                    //carrega THIS
+                    commands.add("leaw $3, %A");
 
                 } else {
-
+                    //carrega THAT
+                    commands.add("leaw $4, %A");
                 }
+                //armazena valor em %D
+                commands.add("movw (%A), %D");
+                
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
             }
         }
 
