@@ -37,7 +37,7 @@ SimpleNeg.vm 1 300
 SimpleOr.vm 1 300
 SimpleSub.vm 1 300
 #
-#SimplePushAdd.vm 1 300
+SimplePushAdd.vm 1 300
 SimplePushArg.vm 1 300
 #
 SimpleEq.vm 3 300
@@ -46,7 +46,9 @@ SimpleGt.vm 3 300
 #SimpleIfGoto.vm 1 300
 SimpleLt.vm 1 300
 #
-#StackTest.vm 1 3000
-#StaticsTest.vm 1 3000
-#SimpleFunction.vm 1 300
-#Mult.vm 1 4000
+StackTest.vm 1 3000
+StaticsTest.vm 1 3000
+SimpleFunction.vm 1 300
+Mult.vm 1 4000
+#
+BasicLoop.vm 1 300
