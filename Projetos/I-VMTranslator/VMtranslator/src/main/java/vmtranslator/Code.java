@@ -265,11 +265,26 @@ public class Code {
                 commands.add("movw %D, (%A)");
 
             } else if (segment.equals("pointer")) {
+                //atualiza SP
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %D");
+                commands.add("decw %D");
+                commands.add("movw %D, (%A)");
+
+                //Carrega em %D valor que quer salvar
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw (%A), %D");
                 if(index==0) {
+                    //armazena em THIS
+                    commands.add("leaw $3, %A");
 
                 } else {
+                    //armazena em THAT
+                    commands.add("leaw $4, %A");
 
                 }
+                commands.add("movw %D, (%A)");
             }
         } else if (command == Parser.CommandType.C_PUSH) {
             commands.add(String.format("; %d - PUSH %s %d", lineCode++ ,segment, index));
