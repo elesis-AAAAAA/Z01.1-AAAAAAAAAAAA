@@ -187,8 +187,48 @@ public class Code {
                 commands.add("movw %D, (%A)");
 
             } else if (segment.equals("this")) {
+                //carrega valor do this
+                commands.add("leaw $" + index + " %A");
+                commands.add("movw %A, %D");
+
+                //acessa endereço this
+                commands.add("leaw $3, %A");
+                commands.add("movw (%A), %A");
+                commands.add("addw %A %D, %A");
+
+                commands.add("movw (%A), %D");
+
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("that")) {
+                //carrega valor do that
+                commands.add("leaw $" + index + " %A");
+                commands.add("movw %A, %D");
+
+                //acessa endereço that
+                commands.add("leaw $4, %A");
+                commands.add("movw (%A), %A");
+                commands.add("addw %A %D, %A");
+
+                commands.add("movw (%A), %D");
+
+                //busca stack vazia
+                commands.add("leaw $0, %A");
+                commands.add("movw (%A), %A");
+                commands.add("movw %D, (%A)");
+
+                //incrementa SP
+                commands.add("addw $1, %A, %D");
+                commands.add("leaw $0, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("static")) {
 

@@ -22,8 +22,8 @@
 SimplePushConst.vm 1 300
 SimplePushLocal.vm 1 300
 #SimplePushTemp.vm 1 300
-#SimplePushThat.vm 1 300
-#SimplePushThis.vm 1 300
+SimplePushThat.vm 1 300
+SimplePushThis.vm 1 300
 #
 #SimplePopLocal.vm 1 300
 #SimplePopPointer.vm 1 300
