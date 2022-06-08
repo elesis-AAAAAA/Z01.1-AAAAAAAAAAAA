@@ -437,6 +437,56 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Retorno de função", lineCode++));
 
+        // Copia o valor do resultado da função no ARG
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
+        commands.add("leaw $ARG, %A");
+        commands.add("movw %D, (%A)");
+
+        // Salvar o valor do LCL
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
+        commands.add("decw %D");
+        commands.add("leaw $LCL, %A");
+        commands.add("movw %D, (%A)");
+
+        // Salvar o valor do that
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("leaw $THAT, %A");
+        commands.add("movw %D, (%A)");
+
+        // Salvar o valor do this
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("decw, %D");
+        commands.add("leaw $THIS, %A");
+        commands.add("movw %D, (%A)");
+
+        // Salvar o valor do arg
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("leaw $ARG, %A");
+        commands.add("movw %D, (%A)");
+
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("decw %D");
+        commands.add("decw, %D");
+        commands.add("leaw %D");
+        commands.add("jmp");
+        commands.add("nop");
     }
 
     /**
