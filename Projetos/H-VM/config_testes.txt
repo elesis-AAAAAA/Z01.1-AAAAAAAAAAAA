@@ -32,9 +32,9 @@
 #SimplePopThis.vm 1 300
 #
 SimpleAdd.vm 1 300
-#SimpleAnd.vm 1 300
+SimpleAnd.vm 1 300
 SimpleNeg.vm 1 300
-#SimpleOr.vm 1 300
+SimpleOr.vm 1 300
 SimpleSub.vm 1 300
 #
 #SimplePushAdd.vm 1 300
