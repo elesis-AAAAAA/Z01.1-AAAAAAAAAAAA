@@ -232,32 +232,30 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
 
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %D");
         commands.add(String.format("leaw %s, %A", label));
+        commands.add("jne %D");
 
-        if (){
-            commands.add("je %D");
-            commands.add("nop");
-        } else if (){
-            commands.add("jne %D");
-            commands.add("nop");
-        } else if (){
-            commands.add("jg %D");
-            commands.add("nop");
-        } else if (){
-            commands.add("jge %D");
-            commands.add("nop");
-        } else if (){
-            commands.add("jl %D");
-            commands.add("nop");
-        } else {
-            commands.add("jle %D");
-            commands.add("nop");
-        }
+        commands.add("nop");
         
         String[] stringArray = new String[ commands.size() ];
         commands.toArray( stringArray );
         write(stringArray);
 
+        // if (){
+            
+        // } else if (){
+        //     commands.add("jne %D");
+        // } else if (){
+        //     commands.add("jg %D");
+        // } else if (){
+        //     commands.add("jge %D");
+        // } else if (){
+        //     commands.add("jl %D");
+        // } else {
+        //     commands.add("jle %D");
+        // }
      }
 
     /**
