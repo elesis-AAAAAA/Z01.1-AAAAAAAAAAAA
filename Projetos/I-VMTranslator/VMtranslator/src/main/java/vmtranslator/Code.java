@@ -714,10 +714,16 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
 
+        //atualiza SP
+        commands.add("leaw $0, %A");
+        commands.add("movw (%A), %D");
+        commands.add("decw %D");
+        commands.add("movw %D, (%A)");
+
         // Busca valor no topo da pilha
         commands.add("leaw $SP, %A");
         commands.add("movw (%A), %A");
-        commands.add("decw %A");
+        // commands.add("decw %A");
         commands.add("movw (%A), %D");
 
         // Se o valor no topo da pilha for diferente de 0, faz o salto para o label
