@@ -1,6 +1,7 @@
 site
 DEV0_CV_Default.cdf
 /Projetos/B-LogicaCombinacional/Quartus/DE0_CV_Default.cdf
+/Projetos/I-VMTranslator/bin/nasm
 *.hack
 *.mif
 *.pyc
@@ -14,3 +15,4 @@ DEV0_CV_Default.cdf
 vunit_out
 Projetos/G-Assembler/Assembler/AssemblerZ01.iml
 Projetos/G-Assembler/Assembler/logJSymbolTable.txt
+Projetos/I-VMTranslator/VMtranslator/Z01-VMTranslator.jar
