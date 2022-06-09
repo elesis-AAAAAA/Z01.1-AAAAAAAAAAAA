@@ -686,6 +686,12 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add( "; Label (marcador)" );
 
+        commands.add(String.format(%s:"", label));
+
+        String[] stringArray = new String[commands.size()];
+        commands.toArray(stringArray);
+        write(stringArray);
+
     }
 
     /**
@@ -697,6 +703,14 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Incondicional", lineCode++));
+
+        commands.add(String.format("leaw $%s, %A", label));
+        commands.add("jmp");
+        commands.add("nop");
+
+        String[] stringArray = new String[commands.size()];
+        commands.toArray(stringArray);
+        write(stringArray);
 
     }
 
@@ -710,6 +724,20 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Condicional", lineCode++));
 
+        // Busca valor no topo da pilha
+        commands.add("leaw $SP, %A");
+        commands.add("movw (%A), %A");
+        commands.add("decw %A");
+        commands.add("movw (%A), %D");
+
+        // Se o valor no topo da pilha for diferente de 0, faz o salto para o label
+        commands.add(String.format("leaw $%s, %A", label));
+        commands.add("jne %D");
+        commands.add("nop")
+
+        String[] stringArray = new String[commands.size()];
+        commands.toArray(stringArray);
+        write(stringArray);
      }
 
     /**
