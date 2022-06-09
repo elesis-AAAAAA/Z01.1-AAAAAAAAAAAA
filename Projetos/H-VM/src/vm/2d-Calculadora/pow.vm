@@ -1,24 +1,24 @@
 function pow 3
-    push argument 0
-	pop local 0
-    push constant 1
-	pop local 1
-	push argument 1
-	pop local 2
+    push argument 0 // coloca valor do argumento 0 na pilha 
+	pop local 0 // coloca valor do argumento 0 na variavel local 0
+    push constant 1 // coloca valor 1 na pilha
+	pop local 1 // coloca valor 1 na variavel local 1
+	push argument 1 // coloca valor do argumento 1 na pilha 
+	pop local 2 // coloca valor do argumento 1 na variavel local 2
 
-    label LOOP_START
-    push local 0
-    push local 1
-    call mult 2
-    pop local 1
-    push local 2
-    push constant 1
-    sub
-    pop local 2
-    push local 2
-    push constant 0
-    gt
-    if-goto LOOP_START
+    label LOOP_START // label de inicio do loop
+    push local 0  // coloca valor da variavel local 0 na pilha
+    push local 1 // coloca valor da variavel local 1 na pilha
+    call mult 2 // chama a funcao mult 
+    pop local 1 // coloca o resultado da multiplicacao na variavel local 1
+    push local 2 // coloca valor da variavel local 2 na pilha
+    push constant 1 // coloca valor 1 na pilha
+    sub // subtrai o valor da variavel local 2 com 1
+    pop local 2 // local 2 -= 1
+    push local 2 // coloca valor da variavel local 2 na pilha
+    push constant 0 // coloca valor 0 na pilha
+    gt // compara se o valor da variavel local 2 é maior que 0
+    if-goto LOOP_START // se for maior que 0, continua o loop
     
-    push local 1
+    push local 1 // coloca valor da variavel local 1 na pilha (resultado)
     return

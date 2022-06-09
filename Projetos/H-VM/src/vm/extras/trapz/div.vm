@@ -1,4 +1,4 @@
-function Div 3
+function div 3
 	push constant 0 // coloca 0 no topo da pilha
 	pop local 2 // coloca o valor 0 na variavel local 2 (contador resultado da divisao)
 	push argument 0 // coloca valor do argumento 0 na pilha 

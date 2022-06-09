@@ -1,0 +1,16 @@
+// argument 0 = x1
+// argument 1 = y1
+// argument 2 = x2
+// argument 3 = y2
+// 
+function trapz 0
+	push argument 2 // x2
+	push argument 0 // x1 
+	sub // x2 - x1
+	push argument 1 // y1
+	push argument 3 // y2
+	add // y2 + y1
+	call mult 2 // (x2 - x1) * (y2 + y1)
+	push constant 2 // 2
+	call div 2 // (x2 - x1) * (y2 + y1) / 2
+	return

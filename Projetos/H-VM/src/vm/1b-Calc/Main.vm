@@ -21,13 +21,13 @@ function Main.main 0
 // esse loop sempre deve existir!
 // caso contrario o computador vai
 // executar lixo de memoria.
-push constant 14
-push constant 2
-add
-push constant 123
-push constant 1
-sub
-sub
-pop temp 0
-label while
+push constant 14 // coloca 14 no topo da pilha
+push constant 2 // coloca 2 no topo da pilha
+add // faz a soma
+push constant 123 // coloca 123 no topo da pilha
+push constant 1 // coloca 1 no topo da pilha
+sub // faz a subtracao
+sub // faz a subtracao novamente entre o resultado da soma e o resultado da subtracao
+pop temp 0 // coloca o resultado da subtracao no temp 0
+label while 
   goto while

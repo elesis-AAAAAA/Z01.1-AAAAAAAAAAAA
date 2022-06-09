@@ -23,14 +23,14 @@
 // ---------------------------------
 
 function Main.main 0
-  push constant 14
-  push constant 2
-  add
-  push constant 8
-  push constant 1
-  sub
-  call mult 2
-  pop temp 1
+  push constant 14 // coloca 14 no topo da pilha
+  push constant 2  // coloca 2 no topo da pilha
+  add // soma os dois valores
+  push constant 8 // coloca 8 no topo da pilha
+  push constant 1 // coloca 1 no topo da pilha
+  sub // subtrai os dois valores
+  call mult 2 // chama a funcao mult e passa 2 parametros (14+2) e (8-1)
+  pop temp 1 // popa o resultado da funcao mult para o temp 1
 
 
 

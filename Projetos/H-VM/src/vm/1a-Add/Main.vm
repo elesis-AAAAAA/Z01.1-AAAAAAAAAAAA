@@ -14,10 +14,10 @@ function Main.main 0
 // esse loop sempre deve existir!
 // caso contrario o computador vai
 // executar lixo de memoria.
-  push constant 123
-  push constant 23
-  add
-label while
+  push constant 123 // coloca 123 no topo da pilha
+  push constant 23 // coloca 23 no topo da pilha
+  add // adiciona os dois valores
+label while 
 
 
   goto while

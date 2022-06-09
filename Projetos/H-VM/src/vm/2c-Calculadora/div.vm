@@ -1,3 +1,4 @@
+// Mesma função que a 1c
 function div 3
 	push constant 0
 	pop local 2

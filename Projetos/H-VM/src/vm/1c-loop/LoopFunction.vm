@@ -1,16 +1,16 @@
 function LoopFunction 1
-  push constant 0
-  pop local 0
+  push constant 0 // coloca 0 no topo da pilha
+  pop local 0 // coloca o valor 0 na variavel local 0 (contador)
   label loop
-    push constant 55
-    push local 0
-    eq
-    if-goto end
-    push constant 1
-    push local 0
-    add
-    pop local 0
-    goto loop
-  label end
-    push local 0
+    push constant 55 // coloca 55 no topo da pilha
+    push local 0 // coloca o valor da variavel local 0 (contador) no topo da pilha
+    eq // compara o contador com 55
+    if-goto end // se o contador for igual a 55, entra no if
+    push constant 1 // coloca 1 no topo da pilha 
+    push local 0 // coloca o valor da variavel local 0 (contador) no topo da pilha
+    add // soma o contador com 1 -> contador +=1
+    pop local 0 // coloca o valor do contador na variavel local 0 novamente
+    goto loop // volta para o loop
+  label end // label do fim do loop
+    push local 0 // coloca o valor da variavel local 0 (contador) no topo da pilha
     return 

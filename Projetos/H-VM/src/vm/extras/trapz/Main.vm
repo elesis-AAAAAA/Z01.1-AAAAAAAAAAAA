@@ -1,0 +1,15 @@
+// ---------------------------------  
+// ---------------------------------
+
+function Main.main 0
+
+push constant 1
+push constant 2
+push constant 2
+push constant 4
+call trapz 4
+
+
+// nao deve tirar isso!
+label while2
+    goto while2

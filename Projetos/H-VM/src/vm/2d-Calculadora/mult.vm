@@ -1,3 +1,4 @@
+// Mesma função que o exercício 2b
 function mult 2
 	push constant 0
 	pop local 0

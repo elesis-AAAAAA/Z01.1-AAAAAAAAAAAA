@@ -17,10 +17,10 @@ function Main.main 0
    
 label end
 
-push temp 0
-push temp 1
-call Div 2
-pop temp 3
+push temp 0 // temp 0 = valor a ser dividido
+push temp 1 // temp 1 = divisor
+call Div 2 // temp 3 = temp 0 / temp 1
+pop temp 3 // temp 3 = resultado
 // esse loop sempre deve existir!
 // caso contrario o computador vai
 // executar lixo de memoria.
